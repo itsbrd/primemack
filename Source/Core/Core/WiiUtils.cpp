@@ -76,7 +76,7 @@ static bool ImportWAD(IOS::HLE::Kernel& ios, const DiscIO::VolumeWAD& wad,
     if (ret != IOS::HLE::IOSC_FAIL_CHECKVALUE)
     {
       PanicAlertFmtT("WAD installation failed: Could not initialise title import (error {0}).",
-                     ret);
+                     static_cast<int>(ret));
     }
     return false;
   }

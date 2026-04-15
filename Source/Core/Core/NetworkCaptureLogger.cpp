@@ -59,6 +59,8 @@ void BinarySSLCaptureLogger::LogSSLRead(const void* data, std::size_t length, s3
 {
   if (!Config::Get(Config::MAIN_NETWORK_SSL_DUMP_READ))
     return;
+  const std::time_t now = std::time(nullptr);
+  const std::tm local_tm = *std::localtime(&now);
   const std::string filename =
       File::GetUserPath(D_DUMPSSL_IDX) + SConfig::GetInstance().GetGameID() + "_read.bin";
   File::IOFile(filename, "ab").WriteBytes(data, length);
@@ -80,9 +82,14 @@ NetworkCaptureType BinarySSLCaptureLogger::GetCaptureType() const
 
 PCAPSSLCaptureLogger::PCAPSSLCaptureLogger()
 {
+  const std::time_t now = std::time(nullptr);
+  const std::tm local_tm = *std::localtime(&now);
+  char time_buf[64];
+  std::strftime(time_buf, sizeof(time_buf), "%Y-%m-%d %Hh%Mm%Ss", &local_tm);
+
   const std::string filepath =
-      fmt::format("{}{} {:%Y-%m-%d %Hh%Mm%Ss}.pcap", File::GetUserPath(D_DUMPSSL_IDX),
-                  SConfig::GetInstance().GetGameID(), fmt::localtime(std::time(nullptr)));
+      fmt::format("{}{} {}.pcap", File::GetUserPath(D_DUMPSSL_IDX),
+                  SConfig::GetInstance().GetGameID(), time_buf);
   m_file = std::make_unique<Common::PCAP>(new File::IOFile(filepath, "wb"),
                                           Common::PCAP::LinkType::Ethernet);
 }

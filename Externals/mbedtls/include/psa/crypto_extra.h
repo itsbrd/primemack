@@ -102,13 +102,13 @@ static inline psa_algorithm_t psa_get_key_enrollment_algorithm(
  * \param[in] attributes        The key attribute structure to query.
  * \param[out] slot_number      On success, the slot number containing the key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key is located in a secure element, and \p *slot_number
  *         indicates the slot number that contains it.
- * \retval #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_PERMITTED
  *         The caller is not permitted to query the slot number.
  *         Mbed Crypto currently does not return this error.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The key is not located in a secure element.
  */
 psa_status_t psa_get_key_slot_number(
@@ -168,35 +168,35 @@ static inline void psa_clear_key_slot_number(
  *
  * \param[in] attributes        The attributes of the existing key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key was successfully registered.
  *         Note that depending on the design of the driver, this may or may
  *         not guarantee that a key actually exists in the designated slot
  *         and is compatible with the specified attributes.
- * \retval #PSA_ERROR_ALREADY_EXISTS
+ * \return #PSA_ERROR_ALREADY_EXISTS
  *         There is already a key with the identifier specified in
  *         \p attributes.
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_NOT_SUPPORTED
  *         The secure element driver for the specified lifetime does not
  *         support registering a key.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The identifier in \p attributes is invalid, namely the identifier is
  *         not in the user range.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         \p attributes specifies a lifetime which is not located
  *         in a secure element.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         No slot number is specified in \p attributes,
  *         or the specified slot number is not valid.
- * \retval #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_PERMITTED
  *         The caller is not authorized to register the specified key slot.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_DATA_INVALID
- * \retval #PSA_ERROR_DATA_CORRUPT
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_DATA_INVALID
+ * \return #PSA_ERROR_DATA_CORRUPT
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -312,16 +312,16 @@ void mbedtls_psa_get_stats( mbedtls_psa_stats_t *stats );
  *                          It must be less or equal to
  *                          #MBEDTLS_ENTROPY_MAX_SEED_SIZE.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The seed value was injected successfully. The random generator
  *         of the PSA Crypto implementation is now ready for use.
  *         You may now call psa_crypto_init() and use the PSA Crypto
  *         implementation.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         \p seed_size is out of range.
- * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_STORAGE_FAILURE
  *         There was a failure reading or writing from storage.
- * \retval #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_PERMITTED
  *         The library has already been initialized. It is no longer
  *         possible to call this function.
  */
@@ -491,10 +491,10 @@ psa_status_t mbedtls_psa_inject_entropy(const uint8_t *seed,
  *                              according to \p type as described above.
  * \param data_length           Size of the \p data buffer in bytes.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
                                            psa_key_type_t type,
@@ -521,8 +521,8 @@ psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
  * \param[out] data_length      On success, the number of bytes
  *                              that make up the key domain parameters data.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  */
 psa_status_t psa_get_key_domain_parameters(
     const psa_key_attributes_t *attributes,
@@ -691,11 +691,11 @@ mbedtls_ecp_group_id mbedtls_ecc_group_of_psa( psa_ecc_family_t curve,
  * \param output_size           The size of the \p output buffer in bytes.
  * \param[out] output_length    On success, set this value to \p output_size.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success. The output buffer contains \p output_size bytes of
  *         cryptographic-quality random data, and \c *output_length is
  *         set to \p output_size.
- * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
  *         The random generator requires extra entropy and there is no
  *         way to obtain entropy under current environment conditions.
  *         This error should not happen under normal circumstances since
@@ -703,7 +703,7 @@ mbedtls_ecp_group_id mbedtls_ecc_group_of_psa( psa_ecc_family_t curve,
  *         it needs. However implementations of this function may return
  *         #PSA_ERROR_INSUFFICIENT_ENTROPY if there is no way to obtain
  *         entropy without blocking indefinitely.
- * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \return #PSA_ERROR_HARDWARE_FAILURE
  *         A failure of the random generator hardware that isn't covered
  *         by #PSA_ERROR_INSUFFICIENT_ENTROPY.
  */
@@ -749,9 +749,9 @@ typedef uint64_t psa_drv_slot_number_t;
  *
  * \param key_id  Key identifier to test.
  *
- * \retval 1
+ * \return 1
  *         The key identifier is a builtin key identifier.
- * \retval 0
+ * \return 0
  *         The key identifier is not a builtin key identifier.
  */
 static inline int psa_key_id_is_builtin( psa_key_id_t key_id )
@@ -790,11 +790,11 @@ static inline int psa_key_id_is_builtin( psa_key_id_t key_id )
  *                              through \p lifetime which corresponds to the
  *                              requested built-in key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The requested key identifier designates a built-in key.
  *         In a multi-application configuration, the requested owner
  *         is allowed to access it.
- * \retval #PSA_ERROR_DOES_NOT_EXIST
+ * \return #PSA_ERROR_DOES_NOT_EXIST
  *         The requested key identifier is not a built-in key which is known
  *         to this function. If a key exists in the key storage with this
  *         identifier, the data from the storage will be used.

@@ -91,7 +91,7 @@ ESDevice::ESDevice(Kernel& ios, const std::string& device_name) : Device(ios, de
     if (result != FS::ResultCode::Success && result != FS::ResultCode::AlreadyExists)
     {
       ERROR_LOG_FMT(IOS_ES, "Failed to create {}: error {}", directory.path,
-                    FS::ConvertResult(result));
+                    static_cast<int>(FS::ConvertResult(result)));
     }
 
     // Now update the UID/GID and other attributes.
@@ -1058,7 +1058,7 @@ ReturnCode ESDevice::VerifyContainer(VerifyContainerType type, VerifyMode mode,
   ret = iosc.ImportCertificate(ca_cert, IOSC::HANDLE_ROOT_KEY, ca_handle, PID_ES);
   if (ret != IPC_SUCCESS)
   {
-    ERROR_LOG_FMT(IOS_ES, "VerifyContainer: IOSC_ImportCertificate(ca) failed with error {}", ret);
+    ERROR_LOG_FMT(IOS_ES, "VerifyContainer: IOSC_ImportCertificate(ca) failed with error {}", static_cast<int>(ret));
     return ret;
   }
 
@@ -1073,7 +1073,7 @@ ReturnCode ESDevice::VerifyContainer(VerifyContainerType type, VerifyMode mode,
   if (ret != IPC_SUCCESS)
   {
     ERROR_LOG_FMT(IOS_ES, "VerifyContainer: IOSC_ImportCertificate(issuer) failed with error {}",
-                  ret);
+                  static_cast<int>(ret));
     return ret;
   }
 
@@ -1082,7 +1082,7 @@ ReturnCode ESDevice::VerifyContainer(VerifyContainerType type, VerifyMode mode,
   ret = iosc.VerifyPublicKeySign(signed_blob.GetSha1(), issuer_handle, signature, PID_ES);
   if (ret != IPC_SUCCESS)
   {
-    ERROR_LOG_FMT(IOS_ES, "VerifyContainer: IOSC_VerifyPublicKeySign failed with error {}", ret);
+    ERROR_LOG_FMT(IOS_ES, "VerifyContainer: IOSC_VerifyPublicKeySign failed with error {}", static_cast<int>(ret));
     return ret;
   }
 
@@ -1092,12 +1092,12 @@ ReturnCode ESDevice::VerifyContainer(VerifyContainerType type, VerifyMode mode,
     if (ret != IPC_SUCCESS)
     {
       ERROR_LOG_FMT(IOS_ES, "VerifyContainer: Writing the issuer cert failed with return code {}",
-                    ret);
+                    static_cast<int>(ret));
     }
 
     ret = WriteNewCertToStore(ca_cert);
     if (ret != IPC_SUCCESS)
-      ERROR_LOG_FMT(IOS_ES, "VerifyContainer: Writing the CA cert failed with return code {}", ret);
+      ERROR_LOG_FMT(IOS_ES, "VerifyContainer: Writing the CA cert failed with return code {}", static_cast<int>(ret));
   }
 
   if (ret == IPC_SUCCESS && issuer_handle_out)

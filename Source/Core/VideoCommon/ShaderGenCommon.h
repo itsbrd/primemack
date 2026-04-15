@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <fmt/format.h>
+#include "Common/Logging/Log.h"
 
 #include "Common/BitField.h"
 #include "Common/CommonTypes.h"
@@ -109,11 +110,21 @@ public:
   ShaderCode() { m_buffer.reserve(16384); }
   const std::string& GetBuffer() const { return m_buffer; }
 
+  template <typename T>
+  static constexpr auto FmtValue(T&& value)
+  {
+    using U = std::remove_cv_t<std::remove_reference_t<T>>;
+    if constexpr (std::is_enum_v<U>)
+      return static_cast<std::underlying_type_t<U>>(value);
+    else
+      return std::forward<T>(value);
+  }
+
   // Writes format strings using fmtlib format strings.
   template <typename... Args>
   void Write(fmt::format_string<Args...> format, Args&&... args)
   {
-    fmt::format_to(std::back_inserter(m_buffer), format, std::forward<Args>(args)...);
+    fmt::format_to(std::back_inserter(m_buffer), fmt::runtime(format), Common::Log::FmtValue(std::forward<Args>(args))...);
   }
 
 protected:

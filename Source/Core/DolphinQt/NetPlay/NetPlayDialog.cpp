@@ -1078,7 +1078,20 @@ std::string NetPlayDialog::FindGBARomPath(const std::array<u8, 20>& hash, std::s
                 "Mismatched ROMs\n"
                 "Selected: {0}\n- Title: {1}\n- Hash: {2:02X}\n"
                 "Expected:\n- Title: {3}\n- Hash: {4:02X}",
-                rom_path, rom_title, fmt::join(rom_hash, ""), title, fmt::join(hash, ""))));
+                rom_path, rom_title,
+                [&]() {
+                  std::string s;
+                  for (const auto& v : rom_hash)
+                    s += fmt::format("{:02x}", static_cast<unsigned int>(v));
+                  return s;
+                }(),
+                title,
+                [&]() {
+                  std::string s;
+                  for (const auto& v : hash)
+                    s += fmt::format("{:02x}", static_cast<unsigned int>(v));
+                  return s;
+                }())));
       }
       else
       {

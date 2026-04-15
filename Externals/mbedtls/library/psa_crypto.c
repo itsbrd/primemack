@@ -554,9 +554,9 @@ static psa_status_t validate_unstructured_key_bit_size( psa_key_type_t type,
  * \param[in] key_type      The key type of the key to be used with the
  *                          \p algorithm.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The \p key_type is valid for use with the \p algorithm
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The \p key_type is not valid for use with the \p algorithm
  */
 MBEDTLS_STATIC_TESTABLE psa_status_t psa_mac_key_can_do(
@@ -883,10 +883,10 @@ static int psa_key_algorithm_permits( psa_key_type_t key_type,
  *       have different properties depending on what kind of cipher it is
  *       combined with.
  *
- * \retval PSA_SUCCESS                  When \p alg is a specific algorithm
+ * \return PSA_SUCCESS                  When \p alg is a specific algorithm
  *                                      allowed by the \p policy.
- * \retval PSA_ERROR_INVALID_ARGUMENT   When \p alg is not a specific algorithm
- * \retval PSA_ERROR_NOT_PERMITTED      When \p alg is a specific algorithm, but
+ * \return PSA_ERROR_INVALID_ARGUMENT   When \p alg is not a specific algorithm
+ * \return PSA_ERROR_NOT_PERMITTED      When \p alg is a specific algorithm, but
  *                                      the \p policy does not allow it.
  */
 static psa_status_t psa_key_policy_permits( const psa_key_policy_t *policy,
@@ -919,10 +919,10 @@ static psa_status_t psa_key_policy_permits( const psa_key_policy_t *policy,
  * \param[in,out] policy    The policy to restrict.
  * \param[in] constraint    The policy constraint to apply.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         \c *policy contains the intersection of the original value of
  *         \c *policy and \c *constraint.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         \c key_type, \c *policy and \c *constraint are incompatible.
  *         \c *policy is unchanged.
  */
@@ -1632,7 +1632,7 @@ static psa_status_t psa_validate_key_attributes(
  * \param[out] p_drv        On any return, the driver for the key, if any.
  *                          NULL for a transparent key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key slot is ready to receive key material.
  * \return If this function fails, the key slot is an invalid state.
  *         You must call psa_fail_key_creation() to wipe and free the slot.
@@ -1756,14 +1756,14 @@ static psa_status_t psa_start_key_creation(
  * \param[out] key      On success, identifier of the key. Note that the
  *                      key identifier is also stored in the key slot.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key was successfully created.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
- * \retval #PSA_ERROR_ALREADY_EXISTS
- * \retval #PSA_ERROR_DATA_INVALID
- * \retval #PSA_ERROR_DATA_CORRUPT
- * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \return #PSA_ERROR_ALREADY_EXISTS
+ * \return #PSA_ERROR_DATA_INVALID
+ * \return #PSA_ERROR_DATA_CORRUPT
+ * \return #PSA_ERROR_STORAGE_FAILURE
  *
  * \return If this function fails, the key slot is an invalid state.
  *         You must call psa_fail_key_creation() to wipe and free the slot.
@@ -5155,11 +5155,11 @@ psa_status_t mbedtls_psa_inject_entropy( const uint8_t *seed,
  * \param  type  The key type
  * \param  bits  The number of bits of the key
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key type and size are valid.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The size in bits of the key is not valid.
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_NOT_SUPPORTED
  *         The type and/or the size in bits of the key or the combination of
  *         the two is not supported.
  */

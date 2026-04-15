@@ -5,6 +5,26 @@
 
 #include <cstddef>
 #include <fmt/format.h>
+
+#include <type_traits>
+
+namespace Common::Log
+{
+template <typename T>
+  requires (!std::is_enum_v<std::remove_reference_t<T>>)
+constexpr decltype(auto) FmtValue(T&& v)
+{
+  return std::forward<T>(v);
+}
+
+template <typename E>
+  requires std::is_enum_v<std::remove_reference_t<E>>
+constexpr auto FmtValue(E e)
+{
+  return static_cast<std::underlying_type_t<std::remove_reference_t<E>>>(e);
+}
+}  // namespace Common::Log
+
 #include <string_view>
 #include "Common/FormatUtil.h"
 
@@ -98,7 +118,8 @@ void GenericLogFmt(LogLevel level, LogType type, const char* file, int line, con
   static_assert(NumFields == sizeof...(args),
                 "Unexpected number of replacement fields in format string; did you pass too few or "
                 "too many arguments?");
-  GenericLogFmtImpl(level, type, file, line, format, fmt::make_format_args(args...));
+  const std::string rendered = fmt::format(format, Common::Log::FmtValue(args)...);
+  GenericLogFmtImpl(level, type, file, line, "{}", fmt::make_format_args(rendered));
 }
 }  // namespace Common::Log
 

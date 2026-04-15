@@ -59,10 +59,10 @@ const mbedtls_cipher_info_t *mbedtls_cipher_info_from_psa(
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_CIPHER(\p alg) is true).
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  */
 psa_status_t mbedtls_psa_cipher_encrypt_setup(
     mbedtls_psa_cipher_operation_t *operation,
@@ -89,10 +89,10 @@ psa_status_t mbedtls_psa_cipher_encrypt_setup(
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_CIPHER(\p alg) is true).
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  */
 psa_status_t mbedtls_psa_cipher_decrypt_setup(
     mbedtls_psa_cipher_operation_t *operation,
@@ -116,11 +116,11 @@ psa_status_t mbedtls_psa_cipher_decrypt_setup(
  *                              the core to be less or equal to
  *                              PSA_CIPHER_IV_MAX_SIZE.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The size of \p iv is not acceptable for the chosen algorithm,
  *         or the chosen algorithm does not use an IV.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t mbedtls_psa_cipher_set_iv(
     mbedtls_psa_cipher_operation_t *operation,
@@ -142,10 +142,10 @@ psa_status_t mbedtls_psa_cipher_set_iv(
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t mbedtls_psa_cipher_update(
     mbedtls_psa_cipher_operation_t *operation,
@@ -165,18 +165,18 @@ psa_status_t mbedtls_psa_cipher_update(
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The total input size passed to this operation is not valid for
  *         this particular algorithm. For example, the algorithm is a based
  *         on block cipher and requires a whole number of blocks, but the
  *         total input size is not a multiple of the block size.
- * \retval #PSA_ERROR_INVALID_PADDING
+ * \return #PSA_ERROR_INVALID_PADDING
  *         This is a decryption operation for an algorithm that includes
  *         padding, and the ciphertext does not contain valid padding.
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t mbedtls_psa_cipher_finish(
     mbedtls_psa_cipher_operation_t *operation,
@@ -195,7 +195,7 @@ psa_status_t mbedtls_psa_cipher_finish(
  *
  * \param[in,out] operation     Initialized cipher operation.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 psa_status_t mbedtls_psa_cipher_abort( mbedtls_psa_cipher_operation_t *operation );
 
@@ -224,20 +224,20 @@ psa_status_t mbedtls_psa_cipher_abort( mbedtls_psa_cipher_operation_t *operation
  *                              the returned output. Initialized to zero
  *                              by the core.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The size \p iv_length is not acceptable for the chosen algorithm,
  *         or the chosen algorithm does not use an IV.
  *         The total input size passed to this operation is not valid for
  *         this particular algorithm. For example, the algorithm is a based
  *         on block cipher and requires a whole number of blocks, but the
  *         total input size is not a multiple of the block size.
- * \retval #PSA_ERROR_INVALID_PADDING
+ * \return #PSA_ERROR_INVALID_PADDING
  *         This is a decryption operation for an algorithm that includes
  *         padding, and the ciphertext does not contain valid padding.
  */
@@ -275,20 +275,20 @@ psa_status_t mbedtls_psa_cipher_encrypt( const psa_key_attributes_t *attributes,
  *                              the returned output. Initialized to zero
  *                              by the core.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The size of \p iv is not acceptable for the chosen algorithm,
  *         or the chosen algorithm does not use an IV.
  *         The total input size passed to this operation is not valid for
  *         this particular algorithm. For example, the algorithm is a based
  *         on block cipher and requires a whole number of blocks, but the
  *         total input size is not a multiple of the block size.
- * \retval #PSA_ERROR_INVALID_PADDING
+ * \return #PSA_ERROR_INVALID_PADDING
  *         This is a decryption operation for an algorithm that includes
  *         padding, and the ciphertext does not contain valid padding.
  */

@@ -2450,7 +2450,10 @@ static std::string SHA1Sum(const std::string& file_path, std::function<bool(int)
   }
 
   // Convert to hex
-  return fmt::format("{:02x}", fmt::join(ctx->Finish(), ""));
+  std::string result;
+  for (auto v : ctx->Finish())
+    result += fmt::format("{:02x}", static_cast<unsigned int>(v));
+  return result;
 }
 
 void NetPlayClient::ComputeGameDigest(const SyncIdentifier& sync_identifier)
@@ -2549,9 +2552,24 @@ std::string GetPlayerMappingString(PlayerId pid, const PadMappingArray& pad_map,
         std::make_pair("Wii", &wiimote_slots)})
   {
     if (!slots->empty())
-      groups.emplace_back(fmt::format("{}{}", group_name, fmt::join(*slots, ",")));
+    {
+      std::string joined_slots;
+      for (size_t i = 0; i < slots->size(); ++i)
+      {
+        if (i != 0)
+          joined_slots += ",";
+        joined_slots += std::to_string((*slots)[i]);
+      }
+      groups.emplace_back(fmt::format("{}{}", group_name, joined_slots));
+    }
   }
-  std::string res = fmt::format("{}", fmt::join(groups, "|"));
+  std::string res;
+  for (size_t i = 0; i < groups.size(); ++i)
+  {
+    if (i != 0)
+      res += "|";
+    res += groups[i];
+  }
   return res.empty() ? "None" : res;
 }
 

@@ -46,9 +46,9 @@
  *
  * \param key_id  Key identifier to test.
  *
- * \retval 1
+ * \return 1
  *         The key identifier is a volatile key identifier.
- * \retval 0
+ * \return 0
  *         The key identifier is not a volatile key identifier.
  */
 static inline int psa_key_id_is_volatile( psa_key_id_t key_id )
@@ -74,30 +74,30 @@ static inline int psa_key_id_is_volatile( psa_key_id_t key_id )
  *                      key slot containing the description of the key
  *                      identified by \p key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         \p *p_slot contains a pointer to the key slot containing the
  *         description of the key identified by \p key.
  *         The key slot counter has been incremented.
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_ERROR_BAD_STATE
  *         The library has not been initialized.
- * \retval #PSA_ERROR_INVALID_HANDLE
+ * \return #PSA_ERROR_INVALID_HANDLE
  *         \p key is not a valid key identifier.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  *         \p key is a persistent key identifier. The implementation does not
  *         have sufficient resources to load the persistent key. This can be
  *         due to a lack of empty key slot, or available memory.
- * \retval #PSA_ERROR_DOES_NOT_EXIST
+ * \return #PSA_ERROR_DOES_NOT_EXIST
  *         There is no key with key identifier \p key.
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_STORAGE_FAILURE
- * \retval #PSA_ERROR_DATA_CORRUPT
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_DATA_CORRUPT
  */
 psa_status_t psa_get_and_lock_key_slot( mbedtls_svc_key_id_t key,
                                         psa_key_slot_t **p_slot );
 
 /** Initialize the key slot structures.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Currently this function always succeeds.
  */
 psa_status_t psa_initialize_key_slots( void );
@@ -118,9 +118,9 @@ void psa_wipe_all_key_slots( void );
  *                               associated to the returned slot.
  * \param[out] p_slot            On success, a pointer to the slot.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_BAD_STATE
  */
 psa_status_t psa_get_empty_key_slot( psa_key_id_t *volatile_key_id,
                                      psa_key_slot_t **p_slot );
@@ -131,9 +131,9 @@ psa_status_t psa_get_empty_key_slot( psa_key_id_t *volatile_key_id,
  *
  * \param[in] slot  The key slot.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
                The key slot lock counter was incremented.
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  *             The lock counter already reached its maximum value and was not
  *             increased.
  */
@@ -156,10 +156,10 @@ static inline psa_status_t psa_lock_key_slot( psa_key_slot_t *slot )
  *       successfully without doing anything in that case.
  *
  * \param[in] slot  The key slot.
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *             \p slot is NULL or the key slot lock counter has been
  *             decremented successfully.
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  *             The lock counter was equal to 0.
  *
  */
@@ -169,11 +169,11 @@ psa_status_t psa_unlock_key_slot( psa_key_slot_t *slot );
  *
  * \param lifetime      The lifetime to test.
  *
- * \retval 1
+ * \return 1
  *         The lifetime designates an external key. There should be a
  *         registered driver for this lifetime, otherwise the key cannot
  *         be created or manipulated.
- * \retval 0
+ * \return 0
  *         The lifetime designates a key that is volatile or in internal
  *         storage.
  */
@@ -194,8 +194,8 @@ static inline int psa_key_lifetime_is_external( psa_key_lifetime_t lifetime )
  *                          storage, returns a pointer to the driver table
  *                          associated with the key's storage location.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  */
 psa_status_t psa_validate_key_location( psa_key_lifetime_t lifetime,
                                         psa_se_drv_table_entry_t **p_drv );
@@ -204,8 +204,8 @@ psa_status_t psa_validate_key_location( psa_key_lifetime_t lifetime,
  *
  * \param[in] lifetime  The key lifetime attribute.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED The key is persistent but persistent keys
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED The key is persistent but persistent keys
  *             are not supported.
  */
 psa_status_t psa_validate_key_persistence( psa_key_lifetime_t lifetime );
@@ -217,7 +217,7 @@ psa_status_t psa_validate_key_persistence( psa_key_lifetime_t lifetime );
  *                          vendor range are allowed, volatile key identifiers
  *                          excepted \c 0 otherwise.
  *
- * \retval <> 0 if the key identifier is valid, 0 otherwise.
+ * \return <> 0 if the key identifier is valid, 0 otherwise.
  */
 int psa_is_valid_key_id( mbedtls_svc_key_id_t key, int vendor_ok );
 

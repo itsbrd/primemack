@@ -227,7 +227,7 @@ std::unique_ptr<FifoDataFile> FifoDataFile::Load(const std::string& filename, bo
   if (header.fileId != FILE_ID)
   {
     CriticalAlertFmtT("DFF file magic number is incorrect: got {0:08x}, expected {1:08x}",
-                      header.fileId, FILE_ID);
+                      header.fileId, static_cast<unsigned int>(FILE_ID));
     return nullptr;
   }
 
@@ -235,7 +235,7 @@ std::unique_ptr<FifoDataFile> FifoDataFile::Load(const std::string& filename, bo
   {
     CriticalAlertFmtT(
         "The DFF's minimum loader version ({0}) exceeds the version of this FIFO Player ({1})",
-        header.min_loader_version, VERSION_NUMBER);
+        header.min_loader_version, static_cast<unsigned int>(VERSION_NUMBER));
     return nullptr;
   }
 

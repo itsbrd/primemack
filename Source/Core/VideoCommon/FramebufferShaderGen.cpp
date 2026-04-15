@@ -107,7 +107,7 @@ void EmitVertexMainDeclaration(ShaderCode& code, u32 num_tex_inputs, u32 num_col
       code.Write("ATTRIBUTE_LOCATION({}) in float4 rawcolor{};\n", attribute, i);
     }
     if (position_input)
-      code.Write("ATTRIBUTE_LOCATION({}) in float4 rawpos;\n", SHADER_POSITION_ATTRIB);
+      code.Write("ATTRIBUTE_LOCATION({}) in float4 rawpos;\n", static_cast<int>(SHADER_POSITION_ATTRIB));
 
     if (g_ActiveConfig.backend_info.bSupportsGeometryShaders)
     {

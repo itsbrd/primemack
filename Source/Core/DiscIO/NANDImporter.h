@@ -89,8 +89,10 @@ struct fmt::formatter<DiscIO::NANDImporter::NANDFSTEntry>
   auto format(const DiscIO::NANDImporter::NANDFSTEntry& entry, FormatContext& ctx) const
   {
     return fmt::format_to(
-        ctx.out(), "{:12.12} {:#010b} {:#04x} {:#06x} {:#06x} {:#010x} {:#010x} {:#06x} {:#010x}",
-        entry.name, entry.mode, entry.attr, entry.sub, entry.sib, entry.size, entry.uid, entry.gid,
-        entry.x3);
+        ctx.out(), fmt::runtime("{:12.12} {:#010b} {:#04x} {:#06x} {:#06x} {:#010x} {:#010x} {:#06x} {:#010x}"),
+        entry.name, static_cast<unsigned int>(entry.mode), static_cast<unsigned int>(entry.attr),
+        static_cast<unsigned int>(entry.sub), static_cast<unsigned int>(entry.sib),
+        static_cast<unsigned int>(entry.size), static_cast<unsigned int>(entry.uid),
+        static_cast<unsigned int>(entry.gid), static_cast<unsigned int>(entry.x3));
   }
 };

@@ -90,12 +90,12 @@ int psa_is_valid_key_id( mbedtls_svc_key_id_t key, int vendor_ok )
  *                      key slot containing the description of the key
  *                      identified by \p key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The pointer to the key slot containing the description of the key
  *         identified by \p key was returned.
- * \retval #PSA_ERROR_INVALID_HANDLE
+ * \return #PSA_ERROR_INVALID_HANDLE
  *         \p key is not a valid key identifier.
- * \retval #PSA_ERROR_DOES_NOT_EXIST
+ * \return #PSA_ERROR_DOES_NOT_EXIST
  *         There is no key with key identifier \p key in the key slots.
  */
 static psa_status_t psa_get_and_lock_key_slot_in_memory(

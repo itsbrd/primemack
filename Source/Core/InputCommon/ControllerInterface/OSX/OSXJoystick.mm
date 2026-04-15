@@ -20,7 +20,7 @@ void Joystick::AddElements(CFArrayRef elements, std::set<IOHIDElementCookie>& co
   {
     IOHIDElementRef e = (IOHIDElementRef)CFArrayGetValueAtIndex(elements, i);
 
-    const uint32_t type = IOHIDElementGetType(e);
+    const uint32_t type = static_cast<unsigned int>(IOHIDElementGetType(e));
 
     switch (type)
     {
@@ -110,7 +110,7 @@ void Joystick::AddElements(CFArrayRef elements, std::set<IOHIDElementCookie>& co
 
       NOTICE_LOG_FMT(CONTROLLERINTERFACE,
                      "Unknown IOHIDElement, ignoring (Usage: {:x}, Type: {:x})", usage,
-                     IOHIDElementGetType(e));
+                     static_cast<unsigned int>(IOHIDElementGetType(e)));
 
       break;
     }

@@ -423,12 +423,12 @@ psa_status_t psa_driver_wrapper_verify_hash(
  * \param[in] attributes  The key attributes.
  * \param[out] key_buffer_size  Minimum buffer size to contain the key material
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The minimum size for a buffer to contain the key material has been
  *         returned successfully.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The size in bits of the key is not valid.
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_NOT_SUPPORTED
  *         The type and/or the size in bits of the key or the combination of
  *         the two is not supported.
  */

@@ -27,7 +27,15 @@
 #endif
 
 #ifndef _WIN32
+#if __has_include(<QtGui/qpa/qplatformnativeinterface.h>)
+#include <QtGui/qpa/qplatformnativeinterface.h>
+#elif __has_include(<qpa/qplatformnativeinterface.h>)
+#if __has_include(<QtGui/qpa/qplatformnativeinterface.h>)
+#include <QtGui/qpa/qplatformnativeinterface.h>
+#elif __has_include(<qpa/qplatformnativeinterface.h>)
 #include <qpa/qplatformnativeinterface.h>
+#endif
+#endif
 #endif
 
 #include "Common/ScopeGuard.h"

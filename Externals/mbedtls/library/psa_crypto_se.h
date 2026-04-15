@@ -88,9 +88,9 @@ typedef struct psa_se_drv_table_entry_s psa_se_drv_table_entry_t;
  *                              structure.
  *                              Otherwise \c *drv_context is \c NULL.
  *
- * \retval 1
+ * \return 1
  *         \p lifetime corresponds to a registered driver.
- * \retval 0
+ * \return 0
  *         \p lifetime does not correspond to a registered driver.
  */
 int psa_get_se_driver( psa_key_lifetime_t lifetime,

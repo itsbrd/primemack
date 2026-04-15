@@ -1961,17 +1961,16 @@ struct fmt::formatter<std::pair<u8, TevKSel>>
     const u8 even_stage = (cmd - BPMEM_TEV_KSEL) * 2;
     const u8 odd_stage = even_stage + 1;
 
-    return fmt::format_to(
-        ctx.out(),
-        fmt::runtime("Swap table {0}: {1} channel comes from input's {2} channel\n"
-                     "Swap table {0}: {3} channel comes from input's {4} channel\n"
-                     "TEV stage {5} konst color: {6}\n"
-                     "TEV stage {5} konst alpha: {7}\n"
-                     "TEV stage {8} konst color: {9}\n"
-                     "TEV stage {8} konst alpha: {10}"),
-        swap_number, swap_ba ? "Blue" : "Red", ksel.swap_rb,
-        swap_ba ? "Alpha" : "Green", ksel.swap_ga, even_stage, ksel.kcsel_even,
-        ksel.kasel_even, odd_stage, ksel.kcsel_odd, ksel.kasel_odd);
+    return fmt::format_to(ctx.out(),
+                          "Swap table {0}: {1} channel comes from input's {2} channel\n"
+                          "Swap table {0}: {3} channel comes from input's {4} channel\n"
+                          "TEV stage {5} konst color: {6}\n"
+                          "TEV stage {5} konst alpha: {7}\n"
+                          "TEV stage {8} konst color: {9}\n"
+                          "TEV stage {8} konst alpha: {10}",
+                          swap_number, swap_ba ? "Blue" : "Red", ksel.swap_rb,
+                          swap_ba ? "Alpha" : "Green", ksel.swap_ga, even_stage, ksel.kcsel_even,
+                          ksel.kasel_even, odd_stage, ksel.kcsel_odd, ksel.kasel_odd);
   }
 };
 

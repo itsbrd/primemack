@@ -245,7 +245,3 @@ add_custom_target(${lib_target} DEPENDS ${mbedcrypto_target} ${mbedx509_target} 
 if(USE_STATIC_MBEDTLS_LIBRARY AND USE_SHARED_MBEDTLS_LIBRARY)
     add_dependencies(${lib_target} ${mbedcrypto_static_target} ${mbedx509_static_target} ${mbedtls_static_target})
 endif()
-
-if(CMAKE_C_COMPILER_ID MATCHES "Clang|AppleClang")
-  add_compile_options(-Wno-documentation -Wno-error=documentation)
-endif()

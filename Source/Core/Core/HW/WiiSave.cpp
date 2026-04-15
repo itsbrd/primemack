@@ -113,7 +113,7 @@ public:
     if (header.banner_size > sizeof(header.banner))
     {
       ERROR_LOG_FMT(CORE, "NandStorage::ReadHeader: {} corrupted banner_size: {:x}", banner_path,
-                    header.banner_size);
+                    static_cast<unsigned int>(header.banner_size));
       return {};
     }
     header.tid = m_tid;
@@ -556,7 +556,7 @@ CopyResult Import(const std::string& data_bin_path, std::function<bool()> can_ov
   if (!WiiUtils::EnsureTMDIsImported(*ios.GetFS(), *ios.GetES(), header->tid))
   {
     ERROR_LOG_FMT(CORE, "WiiSave::Import: Failed to find or import TMD for title {:16x}",
-                  header->tid);
+                  static_cast<unsigned long long>(header->tid));
     return CopyResult::TitleMissing;
   }
 

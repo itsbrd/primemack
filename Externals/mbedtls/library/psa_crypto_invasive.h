@@ -64,12 +64,12 @@
  *                      It is called by mbedtls_psa_crypto_free().
  *                      By default this is mbedtls_entropy_free().
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
- * \retval #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_PERMITTED
  *         The caller does not have the permission to configure
  *         entropy sources.
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_ERROR_BAD_STATE
  *         The library has already been initialized.
  */
 psa_status_t mbedtls_psa_crypto_configure_entropy_sources(

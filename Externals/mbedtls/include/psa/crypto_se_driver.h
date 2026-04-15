@@ -124,7 +124,7 @@ typedef struct {
  *                                  for all keys whose lifetime is in this
  *                                  location.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The driver is operational.
  *         The core will update the persistent data in storage.
  * \return
@@ -178,7 +178,7 @@ typedef uint64_t psa_key_slot_number_t;
  * \param[in] algorithm         The algorithm to be used to underly the MAC
  *                              operation
  *
- * \retval  #PSA_SUCCESS
+ * \return  #PSA_SUCCESS
  *          Success.
  */
 typedef psa_status_t (*psa_drv_se_mac_setup_t)(psa_drv_se_context_t *drv_context,
@@ -213,7 +213,7 @@ typedef psa_status_t (*psa_drv_se_mac_update_t)(void *op_context,
  * \param[out] p_mac_length     After completion, will contain the number of
  *                              bytes placed in the `p_mac` buffer
  *
- * \retval  #PSA_SUCCESS
+ * \return  #PSA_SUCCESS
  *          Success.
  */
 typedef psa_status_t (*psa_drv_se_mac_finish_t)(void *op_context,
@@ -230,10 +230,10 @@ typedef psa_status_t (*psa_drv_se_mac_finish_t)(void *op_context,
  *                              will be compared against
  * \param[in] mac_length        The size in bytes of the value stored in `p_mac`
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The operation completed successfully and the MACs matched each
  *         other
- * \retval #PSA_ERROR_INVALID_SIGNATURE
+ * \return #PSA_ERROR_INVALID_SIGNATURE
  *         The operation completed successfully, but the calculated MAC did
  *         not match the provided MAC
  */
@@ -264,7 +264,7 @@ typedef psa_status_t (*psa_drv_se_mac_abort_t)(void *op_context);
  * \param[out] p_mac_length     After completion, will contain the number of
  *                              bytes placed in the `output` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
  */
 typedef psa_status_t (*psa_drv_se_mac_generate_t)(psa_drv_se_context_t *drv_context,
@@ -289,10 +289,10 @@ typedef psa_status_t (*psa_drv_se_mac_generate_t)(psa_drv_se_context_t *drv_cont
  *                          be compared against
  * \param[in] mac_length   The size in bytes of `mac`
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The operation completed successfully and the MACs matched each
  *         other
- * \retval #PSA_ERROR_INVALID_SIGNATURE
+ * \return #PSA_ERROR_INVALID_SIGNATURE
  *         The operation completed successfully, but the calculated MAC did
  *         not match the provided MAC
  */
@@ -384,8 +384,8 @@ typedef struct {
  * \param[in] direction         Indicates whether the operation is an encrypt
  *                              or decrypt
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
  */
 typedef psa_status_t (*psa_drv_se_cipher_setup_t)(psa_drv_se_context_t *drv_context,
                                                   void *op_context,
@@ -406,7 +406,7 @@ typedef psa_status_t (*psa_drv_se_cipher_setup_t)(psa_drv_se_context_t *drv_cont
  * \param[in] p_iv              A buffer containing the initialization vector
  * \param[in] iv_length         The size (in bytes) of the `p_iv` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_cipher_set_iv_t)(void *op_context,
                                                    const uint8_t *p_iv,
@@ -428,7 +428,7 @@ typedef psa_status_t (*psa_drv_se_cipher_set_iv_t)(void *op_context,
  * \param[out] p_output_length      After completion, will contain the number
  *                                  of bytes placed in the `p_output` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_cipher_update_t)(void *op_context,
                                                    const uint8_t *p_input,
@@ -449,7 +449,7 @@ typedef psa_status_t (*psa_drv_se_cipher_update_t)(void *op_context,
  * \param[out] p_output_length  After completion, will contain the number of
  *                              bytes placed in the `p_output` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_cipher_finish_t)(void *op_context,
                                                    uint8_t *p_output,
@@ -484,8 +484,8 @@ typedef psa_status_t (*psa_drv_se_cipher_abort_t)(void *op_context);
  * \param[in] output_size       The allocated size in bytes of the `p_output`
  *                              buffer
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_NOT_SUPPORTED
  */
 typedef psa_status_t (*psa_drv_se_cipher_ecb_t)(psa_drv_se_context_t *drv_context,
                                                 psa_key_slot_number_t key_slot,
@@ -553,7 +553,7 @@ typedef struct {
  * \param[out] p_signature_length   On success, the number of bytes
  *                                  that make up the returned signature value
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_asymmetric_sign_t)(psa_drv_se_context_t *drv_context,
                                                      psa_key_slot_number_t key_slot,
@@ -578,7 +578,7 @@ typedef psa_status_t (*psa_drv_se_asymmetric_sign_t)(psa_drv_se_context_t *drv_c
  * \param[in] p_signature       Buffer containing the signature to verify
  * \param[in] signature_length  Size of the `p_signature` buffer in bytes
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The signature is valid.
  */
 typedef psa_status_t (*psa_drv_se_asymmetric_verify_t)(psa_drv_se_context_t *drv_context,
@@ -617,7 +617,7 @@ typedef psa_status_t (*psa_drv_se_asymmetric_verify_t)(psa_drv_se_context_t *drv
  * \param[out] p_output_length  On success, the number of bytes that make up
  *                              the returned output
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_asymmetric_encrypt_t)(psa_drv_se_context_t *drv_context,
                                                         psa_key_slot_number_t key_slot,
@@ -657,7 +657,7 @@ typedef psa_status_t (*psa_drv_se_asymmetric_encrypt_t)(psa_drv_se_context_t *dr
  * \param[out] p_output_length  On success, the number of bytes
  *                              that make up the returned output
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_asymmetric_decrypt_t)(psa_drv_se_context_t *drv_context,
                                                         psa_key_slot_number_t key_slot,
@@ -729,7 +729,7 @@ typedef struct {
  * \param[out] p_ciphertext_length      On success, the size of the output in
  *                                      the `p_ciphertext` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
  */
 typedef psa_status_t (*psa_drv_se_aead_encrypt_t)(psa_drv_se_context_t *drv_context,
@@ -771,7 +771,7 @@ typedef psa_status_t (*psa_drv_se_aead_encrypt_t)(psa_drv_se_context_t *drv_cont
  * \param[out] p_plaintext_length       On success, the size of the output in
  *                                      the `p_plaintext` buffer
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
  */
 typedef psa_status_t (*psa_drv_se_aead_decrypt_t)(psa_drv_se_context_t *drv_context,
@@ -900,12 +900,12 @@ typedef enum
  *                                  This must be a valid slot for a key of the
  *                                  chosen type. It must be unoccupied.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
  *         The core will record \c *key_slot as the key slot where the key
  *         is stored and will update the persistent data in storage.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_STORAGE
  */
 typedef psa_status_t (*psa_drv_se_allocate_key_t)(
     psa_drv_se_context_t *drv_context,
@@ -941,14 +941,14 @@ typedef psa_status_t (*psa_drv_se_allocate_key_t)(
  * \param method                The way in which the key is being created.
  * \param[in] key_slot          Slot where the key is to be stored.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The given slot number is valid for a key with the given
  *         attributes.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The given slot number is not valid for a key with the
  *         given attributes. This includes the case where the slot
  *         number is not valid at all.
- * \retval #PSA_ERROR_ALREADY_EXISTS
+ * \return #PSA_ERROR_ALREADY_EXISTS
  *         There is already a key with the specified slot number.
  *         Drivers may choose to return this error from the key
  *         creation function instead.
@@ -986,7 +986,7 @@ typedef psa_status_t (*psa_drv_se_validate_slot_number_t)(
  *                              key according to the key type.
  *                              This value is not used if the function fails.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success.
  */
 typedef psa_status_t (*psa_drv_se_import_key_t)(
@@ -1012,7 +1012,7 @@ typedef psa_status_t (*psa_drv_se_import_key_t)(
  *                                  that allows writing.
  * \param key_slot                  The key slot to erase.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The slot's content, if any, has been erased.
  */
 typedef psa_status_t (*psa_drv_se_destroy_key_t)(
@@ -1043,13 +1043,13 @@ typedef psa_status_t (*psa_drv_se_destroy_key_t)(
  * \param[out] p_data_length    On success, the number of bytes
  *                              that make up the key data.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_DOES_NOT_EXIST
- * \retval #PSA_ERROR_NOT_PERMITTED
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_HARDWARE_FAILURE
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_DOES_NOT_EXIST
+ * \return #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_HARDWARE_FAILURE
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  */
 typedef psa_status_t (*psa_drv_se_export_key_t)(psa_drv_se_context_t *drv_context,
                                                 psa_key_slot_number_t key,
@@ -1196,7 +1196,7 @@ typedef struct {
  * \param[in] source_key        The key to be used as the source material for
  *                              the key derivation
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_key_derivation_setup_t)(psa_drv_se_context_t *drv_context,
                                                           void *op_context,
@@ -1216,7 +1216,7 @@ typedef psa_status_t (*psa_drv_se_key_derivation_setup_t)(psa_drv_se_context_t *
  * \param[in] p_collateral      A buffer containing the collateral data
  * \param[in] collateral_size   The size in bytes of the collateral
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_key_derivation_collateral_t)(void *op_context,
                                                                uint32_t collateral_id,
@@ -1231,7 +1231,7 @@ typedef psa_status_t (*psa_drv_se_key_derivation_collateral_t)(void *op_context,
  * \param[in] dest_key          The slot where the generated key material
  *                              should be placed
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_key_derivation_derive_t)(void *op_context,
                                                           psa_key_slot_number_t dest_key);
@@ -1245,7 +1245,7 @@ typedef psa_status_t (*psa_drv_se_key_derivation_derive_t)(void *op_context,
  * \param[out] p_output_length  Upon success, contains the number of bytes of
  *                              key material placed in `p_output`
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  */
 typedef psa_status_t (*psa_drv_se_key_derivation_export_t)(void *op_context,
                                                            uint8_t *p_output,

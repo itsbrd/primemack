@@ -272,8 +272,8 @@ void mbedtls_ct_memcpy_offset( unsigned char *dest,
  *                          a writable buffer of sufficient size to hold the
  *                          HMAC value.
  *
- * \retval 0 on success.
- * \retval #MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED
+ * \return 0 on success.
+ * \return #MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED
  *         The hardware accelerator failed.
  */
 int mbedtls_ct_hmac( mbedtls_md_context_t *ctx,

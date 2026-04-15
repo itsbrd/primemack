@@ -193,10 +193,10 @@ static inline psa_key_slot_number_t psa_key_slot_get_slot_number(
  *
  * \param[in,out] slot  The key slot to wipe.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success. This includes the case of a key slot that was
  *         already fully wiped.
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  */
 psa_status_t psa_wipe_key_slot( psa_key_slot_t *slot );
 
@@ -205,11 +205,11 @@ psa_status_t psa_wipe_key_slot( psa_key_slot_t *slot );
  * \param[in,out] slot          Key slot to attach buffer to.
  * \param[in] buffer_length     Requested size of the buffer.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The buffer has been successfully allocated.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  *         Not enough memory was available for allocation.
- * \retval #PSA_ERROR_ALREADY_EXISTS
+ * \return #PSA_ERROR_ALREADY_EXISTS
  *         Trying to allocate a buffer to a non-empty key slot.
  */
 psa_status_t psa_allocate_buffer_to_slot( psa_key_slot_t *slot,
@@ -227,12 +227,12 @@ psa_status_t psa_remove_key_data_from_memory( psa_key_slot_t *slot );
  * \param[in] data              Buffer containing the key material.
  * \param data_length           Size of the key buffer.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key has been copied successfully.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  *         Not enough memory was available for allocation of the
  *         copy buffer.
- * \retval #PSA_ERROR_ALREADY_EXISTS
+ * \return #PSA_ERROR_ALREADY_EXISTS
  *         There was other key material already present in the slot.
  */
 psa_status_t psa_copy_key_material_into_slot( psa_key_slot_t *slot,
@@ -285,12 +285,12 @@ const mbedtls_cipher_info_t *mbedtls_cipher_info_from_psa(
  *                                key_buffer in bytes.
  * \param[out] bits             The key size in number of bits.
  *
- * \retval #PSA_SUCCESS  The key was imported successfully.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_SUCCESS  The key was imported successfully.
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         The key data is not correctly formatted.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
  */
 psa_status_t psa_import_key_into_slot(
     const psa_key_attributes_t *attributes,
@@ -312,13 +312,13 @@ psa_status_t psa_import_key_into_slot(
  * \param[out] data_length      On success, the number of bytes written in
  *                              \p data
  *
- * \retval #PSA_SUCCESS  The key was exported successfully.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_HARDWARE_FAILURE
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_STORAGE_FAILURE
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_SUCCESS  The key was exported successfully.
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_HARDWARE_FAILURE
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t psa_export_key_internal(
     const psa_key_attributes_t *attributes,
@@ -340,13 +340,13 @@ psa_status_t psa_export_key_internal(
  * \param[out] data_length      On success, the number of bytes written in
  *                              \p data
  *
- * \retval #PSA_SUCCESS  The public key was exported successfully.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_HARDWARE_FAILURE
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_STORAGE_FAILURE
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_SUCCESS  The public key was exported successfully.
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_HARDWARE_FAILURE
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t psa_export_public_key_internal(
     const psa_key_attributes_t *attributes,
@@ -365,12 +365,12 @@ psa_status_t psa_export_public_key_internal(
  * \param[out] key_buffer_length  On success, the number of bytes written in
  *                                \p key_buffer.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The key was generated successfully.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_NOT_SUPPORTED
  *         Key size in bits or type not supported.
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of \p key_buffer is too small.
  */
 psa_status_t psa_generate_key_internal( const psa_key_attributes_t *attributes,
@@ -402,18 +402,18 @@ psa_status_t psa_generate_key_internal( const psa_key_attributes_t *attributes,
  * \param[out] signature_length On success, the number of bytes
  *                              that make up the returned signature value.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p signature buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_SIGN_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of the key.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
  */
 psa_status_t psa_sign_message_builtin(
     const psa_key_attributes_t *attributes,
@@ -443,14 +443,14 @@ psa_status_t psa_sign_message_builtin(
  * \param[in]  signature        Buffer containing the signature to verify.
  * \param[in]  signature_length Size of the \p signature buffer in bytes.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The signature is valid.
- * \retval #PSA_ERROR_INVALID_SIGNATURE
+ * \return #PSA_ERROR_INVALID_SIGNATURE
  *         The calculation was performed successfully, but the passed
  *         signature is not a valid signature.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t psa_verify_message_builtin(
     const psa_key_attributes_t *attributes,
@@ -478,18 +478,18 @@ psa_status_t psa_verify_message_builtin(
  * \param[out] signature_length On success, the number of bytes
  *                              that make up the returned signature value.
  *
- * \retval #PSA_SUCCESS
- * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \return #PSA_SUCCESS
+ * \return #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p signature buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_SIGN_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of the key.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
  */
 psa_status_t psa_sign_hash_builtin(
     const psa_key_attributes_t *attributes,
@@ -517,14 +517,14 @@ psa_status_t psa_sign_hash_builtin(
  * \param[in]  signature        Buffer containing the signature to verify.
  * \param[in]  signature_length Size of the \p signature buffer in bytes.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         The signature is valid.
- * \retval #PSA_ERROR_INVALID_SIGNATURE
+ * \return #PSA_ERROR_INVALID_SIGNATURE
  *         The calculation was performed successfully, but the passed
  *         signature is not a valid signature.
- * \retval #PSA_ERROR_NOT_SUPPORTED
- * \retval #PSA_ERROR_INVALID_ARGUMENT
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_NOT_SUPPORTED
+ * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  */
 psa_status_t psa_verify_hash_builtin(
     const psa_key_attributes_t *attributes,

@@ -451,29 +451,29 @@ MBEDTLS_PSA_DEPRECATED static inline psa_status_t psa_asymmetric_verify( psa_key
  * \param key           The persistent identifier of the key.
  * \param[out] handle   On success, a handle to the key.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         Success. The application can now use the value of `*handle`
  *         to access the key.
- * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \return #PSA_ERROR_INSUFFICIENT_MEMORY
  *         The implementation does not have sufficient resources to open the
  *         key. This can be due to reaching an implementation limit on the
  *         number of open keys, the number of open key handles, or available
  *         memory.
- * \retval #PSA_ERROR_DOES_NOT_EXIST
+ * \return #PSA_ERROR_DOES_NOT_EXIST
  *         There is no persistent key with key identifier \p key.
- * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \return #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not a valid persistent key identifier.
- * \retval #PSA_ERROR_NOT_PERMITTED
+ * \return #PSA_ERROR_NOT_PERMITTED
  *         The specified key exists, but the application does not have the
  *         permission to access it. Note that this specification does not
  *         define any way to create such a key, but it may be possible
  *         through implementation-specific means.
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_STORAGE_FAILURE
- * \retval #PSA_ERROR_DATA_INVALID
- * \retval #PSA_ERROR_DATA_CORRUPT
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_STORAGE_FAILURE
+ * \return #PSA_ERROR_DATA_INVALID
+ * \return #PSA_ERROR_DATA_CORRUPT
+ * \return #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -508,13 +508,13 @@ psa_status_t psa_open_key( mbedtls_svc_key_id_t key,
  * \param handle        The key handle to close.
  *                      If this is \c 0, do nothing and return \c PSA_SUCCESS.
  *
- * \retval #PSA_SUCCESS
+ * \return #PSA_SUCCESS
  *         \p handle was a valid handle or \c 0. It is now closed.
- * \retval #PSA_ERROR_INVALID_HANDLE
+ * \return #PSA_ERROR_INVALID_HANDLE
  *         \p handle is not a valid handle nor \c 0.
- * \retval #PSA_ERROR_COMMUNICATION_FAILURE
- * \retval #PSA_ERROR_CORRUPTION_DETECTED
- * \retval #PSA_ERROR_BAD_STATE
+ * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \return #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.

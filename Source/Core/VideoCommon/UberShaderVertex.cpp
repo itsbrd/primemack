@@ -137,13 +137,13 @@ float3 load_input_float3_rawtex(uint vtx_offset, uint attr_offset) {{
   }
   else
   {
-    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawpos;\n", SHADER_POSITION_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in uint4 posmtx;\n", SHADER_POSMTX_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawnormal;\n", SHADER_NORMAL_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawtangent;\n", SHADER_TANGENT_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawbinormal;\n", SHADER_BINORMAL_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawcolor0;\n", SHADER_COLOR0_ATTRIB);
-    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawcolor1;\n", SHADER_COLOR1_ATTRIB);
+    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawpos;\n", static_cast<int>(SHADER_POSITION_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in uint4 posmtx;\n", static_cast<int>(SHADER_POSMTX_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawnormal;\n", static_cast<int>(SHADER_NORMAL_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawtangent;\n", static_cast<int>(SHADER_TANGENT_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in float3 rawbinormal;\n", static_cast<int>(SHADER_BINORMAL_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawcolor0;\n", static_cast<int>(SHADER_COLOR0_ATTRIB));
+    out.Write("ATTRIBUTE_LOCATION({}) in float4 rawcolor1;\n", static_cast<int>(SHADER_COLOR1_ATTRIB));
     for (int i = 0; i < 8; ++i)
       out.Write("ATTRIBUTE_LOCATION({}) in float3 rawtex{};\n", SHADER_TEXTURE0_ATTRIB + i, i);
   }

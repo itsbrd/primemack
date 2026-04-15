@@ -105,7 +105,7 @@ bool NANDImporter::FindSuperblock()
       continue;
     }
 
-    INFO_LOG_FMT(DISCIO, "Superblock #{} has version {:#x}", i, superblock->version);
+    INFO_LOG_FMT(DISCIO, "Superblock #{} has version {:#x}", i, static_cast<unsigned int>(superblock->version));
 
     if (!m_superblock || superblock->version > m_superblock->version)
       m_superblock = std::move(superblock);
@@ -117,7 +117,7 @@ bool NANDImporter::FindSuperblock()
     return false;
   }
 
-  INFO_LOG_FMT(DISCIO, "Using superblock version {:#x}", m_superblock->version);
+  INFO_LOG_FMT(DISCIO, "Using superblock version {:#x}", static_cast<unsigned int>(m_superblock->version));
   return true;
 }
 

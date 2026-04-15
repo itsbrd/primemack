@@ -88,16 +88,16 @@ extern "C" {
  * initialization may have security implications, for example due to improper
  * seeding of the random number generator.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_INSUFFICIENT_STORAGE
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_DATA_CORRUPT
  */
 psa_status_t psa_crypto_init(void);
 
@@ -374,15 +374,15 @@ static size_t psa_get_key_bits(const psa_key_attributes_t *attributes);
  *                              On failure, equivalent to a
  *                              freshly-initialized structure.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -421,12 +421,12 @@ void psa_reset_key_attributes(psa_key_attributes_t *attributes);
  *
  * \param key Identifier of the key to purge.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The key material will have been removed from memory if it is not
  *         currently required.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not a valid key identifier.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -492,34 +492,34 @@ psa_status_t psa_purge_key(mbedtls_svc_key_id_t key);
  *                          identifier defined in \p attributes.
  *                          \c 0 on failure.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
  *         \p source_key is invalid.
- * \return #PSA_ERROR_ALREADY_EXISTS
+ * \retval #PSA_ERROR_ALREADY_EXISTS
  *         This is an attempt to create a persistent key, and there is
  *         already a persistent key with the given identifier.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The lifetime or identifier in \p attributes are invalid.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The policy constraints on the source and specified in
  *         \p attributes are incompatible.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p attributes specifies a key type or key size
  *         which does not match the attributes of the source key.
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The source key does not have the #PSA_KEY_USAGE_COPY usage flag.
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The source key is not exportable and its lifetime does not
  *         allow copying it to the target's lifetime.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_INSUFFICIENT_STORAGE
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -545,31 +545,31 @@ psa_status_t psa_copy_key(mbedtls_svc_key_id_t source_key,
  * \param key  Identifier of the key to erase. If this is \c 0, do nothing and
  *             return #PSA_SUCCESS.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         \p key was a valid identifier and the key material that it
  *         referred to has been erased. Alternatively, \p key is \c 0.
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The key cannot be erased because it is
  *         read-only, either due to a policy or due to physical restrictions.
- * \return #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_INVALID_HANDLE
  *         \p key is not a valid identifier nor \c 0.
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
  *         There was an failure in communication with the cryptoprocessor.
  *         The key material may still be present in the cryptoprocessor.
- * \return #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_DATA_INVALID
  *         This error is typically a result of either storage corruption on a
  *         cleartext storage backend, or an attempt to read data that was
  *         written by an incompatible version of the library.
- * \return #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_STORAGE_FAILURE
  *         The storage is corrupted. Implementations shall make a best effort
  *         to erase key material even in this stage, however applications
  *         should be aware that it may be impossible to guarantee that the
  *         key material is not recoverable in such cases.
- * \return #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
  *         An unexpected condition which is not a storage corruption or
  *         a communication failure occurred. The cryptoprocessor may have
  *         been compromised.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -625,32 +625,32 @@ psa_status_t psa_destroy_key(mbedtls_svc_key_id_t key);
  *                    may be erroneous (e.g. wrong type or truncated data).
  * \param data_length Size of the \p data buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
  *         If the key is persistent, the key material and the key's metadata
  *         have been saved to persistent storage.
- * \return #PSA_ERROR_ALREADY_EXISTS
+ * \retval #PSA_ERROR_ALREADY_EXISTS
  *         This is an attempt to create a persistent key, and there is
  *         already a persistent key with the given identifier.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         The key type or key size is not supported, either by the
  *         implementation in general or in this particular persistent location.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The key attributes, as a whole, are invalid.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The key data is not correctly formatted.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The size in \p attributes is nonzero and does not match the size
  *         of the key data.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_INSUFFICIENT_STORAGE
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -729,23 +729,23 @@ psa_status_t psa_import_key(const psa_key_attributes_t *attributes,
  * \param[out] data_length  On success, the number of bytes
  *                          that make up the key data.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The key does not have the #PSA_KEY_USAGE_EXPORT flag.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p data buffer is too small. You can determine a
  *         sufficient buffer size by calling
  *         #PSA_EXPORT_KEY_OUTPUT_SIZE(\c type, \c bits)
  *         where \c type is the key type
  *         and \c bits is the key size in bits.
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -804,23 +804,23 @@ psa_status_t psa_export_key(mbedtls_svc_key_id_t key,
  * \param[out] data_length  On success, the number of bytes
  *                          that make up the key data.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The key is neither a public key nor a key pair.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p data buffer is too small. You can determine a
  *         sufficient buffer size by calling
  *         #PSA_EXPORT_KEY_OUTPUT_SIZE(#PSA_KEY_TYPE_PUBLIC_KEY_OF_KEY_PAIR(\c type), \c bits)
  *         where \c type is the key type
  *         and \c bits is the key size in bits.
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -853,19 +853,19 @@ psa_status_t psa_export_public_key(mbedtls_svc_key_id_t key,
  *                          that make up the hash value. This is always
  *                          #PSA_HASH_LENGTH(\p alg).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a hash algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         \p hash_size is too small
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -887,21 +887,21 @@ psa_status_t psa_hash_compute(psa_algorithm_t alg,
  * \param[out] hash         Buffer containing the expected hash value.
  * \param hash_length       Size of the \p hash buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The expected hash is identical to the actual hash of the input.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The hash of the message was calculated successfully, but it
  *         differs from the expected hash.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a hash algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p input_length or \p hash_length do not match the hash size for \p alg
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -990,19 +990,19 @@ static psa_hash_operation_t psa_hash_operation_init(void);
  * \param alg               The hash algorithm to compute (\c PSA_ALG_XXX value
  *                          such that #PSA_ALG_IS_HASH(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not a supported hash algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p alg is not a hash algorithm.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1021,15 +1021,15 @@ psa_status_t psa_hash_setup(psa_hash_operation_t *operation,
  * \param[in] input         Buffer containing the message fragment to hash.
  * \param input_length      Size of the \p input buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it muct be active).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1064,19 +1064,19 @@ psa_status_t psa_hash_update(psa_hash_operation_t *operation,
  *                              #PSA_HASH_LENGTH(\c alg) where \c alg is the
  *                              hash algorithm that is calculated.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p hash buffer is too small. You can determine a
  *         sufficient buffer size by calling #PSA_HASH_LENGTH(\c alg)
  *         where \c alg is the hash algorithm that is calculated.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1107,18 +1107,18 @@ psa_status_t psa_hash_finish(psa_hash_operation_t *operation,
  * \param[in] hash              Buffer containing the expected hash value.
  * \param hash_length           Size of the \p hash buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The expected hash is identical to the actual hash of the message.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The hash of the message was calculated successfully, but it
  *         differs from the expected hash.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1143,11 +1143,11 @@ psa_status_t psa_hash_verify(psa_hash_operation_t *operation,
  *
  * \param[in,out] operation     Initialized hash operation.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1169,16 +1169,16 @@ psa_status_t psa_hash_abort(psa_hash_operation_t *operation);
  * \param[in,out] target_operation  The operation object to set up.
  *                                  It must be initialized but not active.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_BAD_STATE
  *         The \p source_operation state is not valid (it must be active).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The \p target_operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1213,23 +1213,23 @@ psa_status_t psa_hash_clone(const psa_hash_operation_t *source_operation,
  * \param[out] mac_length   On success, the number of bytes
  *                          that make up the MAC value.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a MAC algorithm.
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         \p mac_size is too small
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
  *         The key could not be retrieved from storage.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1253,24 +1253,24 @@ psa_status_t psa_mac_compute(mbedtls_svc_key_id_t key,
  * \param[out] mac          Buffer containing the expected MAC value.
  * \param mac_length        Size of the \p mac buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The expected MAC is identical to the actual MAC of the input.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The MAC of the message was calculated successfully, but it
  *         differs from the expected value.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a MAC algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
  *         The key could not be retrieved from storage.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1366,23 +1366,23 @@ static psa_mac_operation_t psa_mac_operation_init(void);
  * \param alg               The MAC algorithm to compute (\c PSA_ALG_XXX value
  *                          such that #PSA_ALG_IS_MAC(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a MAC algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
  *         The key could not be retrieved from storage.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1429,23 +1429,23 @@ psa_status_t psa_mac_sign_setup(psa_mac_operation_t *operation,
  * \param alg               The MAC algorithm to compute (\c PSA_ALG_XXX value
  *                          such that #PSA_ALG_IS_MAC(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c key is not compatible with \c alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \c alg is not supported or is not a MAC algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
  *         The key could not be retrieved from storage
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1467,16 +1467,16 @@ psa_status_t psa_mac_verify_setup(psa_mac_operation_t *operation,
  *                          the MAC calculation.
  * \param input_length      Size of the \p input buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1513,20 +1513,20 @@ psa_status_t psa_mac_update(psa_mac_operation_t *operation,
  *                          bit-size respectively of the key and \c alg is the
  *                          MAC algorithm that is calculated.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active mac sign
  *         operation).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p mac buffer is too small. You can determine a
  *         sufficient buffer size by calling PSA_MAC_LENGTH().
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1557,20 +1557,20 @@ psa_status_t psa_mac_sign_finish(psa_mac_operation_t *operation,
  * \param[in] mac           Buffer containing the expected MAC value.
  * \param mac_length        Size of the \p mac buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The expected MAC is identical to the actual MAC of the message.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The MAC of the message was calculated successfully, but it
  *         differs from the expected MAC.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active mac verify
  *         operation).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1595,11 +1595,11 @@ psa_status_t psa_mac_verify_finish(psa_mac_operation_t *operation,
  *
  * \param[in,out] operation Initialized MAC operation.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1632,21 +1632,21 @@ psa_status_t psa_mac_abort(psa_mac_operation_t *operation);
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a cipher algorithm.
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1679,21 +1679,21 @@ psa_status_t psa_cipher_encrypt(mbedtls_svc_key_id_t key,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a cipher algorithm.
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1792,22 +1792,22 @@ static psa_cipher_operation_t psa_cipher_operation_init(void);
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_CIPHER(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a cipher algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1856,22 +1856,22 @@ psa_status_t psa_cipher_encrypt_setup(psa_cipher_operation_t *operation,
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_CIPHER(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not a cipher algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1898,18 +1898,18 @@ psa_status_t psa_cipher_decrypt_setup(psa_cipher_operation_t *operation,
  * \param[out] iv_length        On success, the number of bytes of the
  *                              generated IV.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, with no IV set).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p iv buffer is too small.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1938,20 +1938,20 @@ psa_status_t psa_cipher_generate_iv(psa_cipher_operation_t *operation,
  * \param[in] iv                Buffer containing the IV to use.
  * \param iv_length             Size of the IV in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active cipher
  *         encrypt operation, with no IV set).
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The size of \p iv is not acceptable for the chosen algorithm,
  *         or the chosen algorithm does not use an IV.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -1981,19 +1981,19 @@ psa_status_t psa_cipher_set_iv(psa_cipher_operation_t *operation,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, with an IV set
  *         if required for the algorithm).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2026,27 +2026,27 @@ psa_status_t psa_cipher_update(psa_cipher_operation_t *operation,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total input size passed to this operation is not valid for
  *         this particular algorithm. For example, the algorithm is a based
  *         on block cipher and requires a whole number of blocks, but the
  *         total input size is not a multiple of the block size.
- * \return #PSA_ERROR_INVALID_PADDING
+ * \retval #PSA_ERROR_INVALID_PADDING
  *         This is a decryption operation for an algorithm that includes
  *         padding, and the ciphertext does not contain valid padding.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, with an IV set
  *         if required for the algorithm).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2072,11 +2072,11 @@ psa_status_t psa_cipher_finish(psa_cipher_operation_t *operation,
  *
  * \param[in,out] operation     Initialized cipher operation.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2126,26 +2126,26 @@ psa_status_t psa_cipher_abort(psa_cipher_operation_t *operation);
  * \param[out] ciphertext_length  On success, the size of the output
  *                                in the \p ciphertext buffer.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not an AEAD algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         \p ciphertext_size is too small.
  *         #PSA_AEAD_ENCRYPT_OUTPUT_SIZE(\c key_type, \p alg,
  *         \p plaintext_length) or
  *         #PSA_AEAD_ENCRYPT_OUTPUT_MAX_SIZE(\p plaintext_length) can be used to
  *         determine the required buffer size.
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2197,28 +2197,28 @@ psa_status_t psa_aead_encrypt(mbedtls_svc_key_id_t key,
  * \param[out] plaintext_length   On success, the size of the output
  *                                in the \p plaintext buffer.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The ciphertext is not authentic.
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not an AEAD algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         \p plaintext_size is too small.
  *         #PSA_AEAD_DECRYPT_OUTPUT_SIZE(\c key_type, \p alg,
  *         \p ciphertext_length) or
  *         #PSA_AEAD_DECRYPT_OUTPUT_MAX_SIZE(\p ciphertext_length) can be used
  *         to determine the required buffer size.
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2327,22 +2327,22 @@ static psa_aead_operation_t psa_aead_operation_init(void);
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_AEAD(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not an AEAD algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2394,22 +2394,22 @@ psa_status_t psa_aead_encrypt_setup(psa_aead_operation_t *operation,
  *                              (\c PSA_ALG_XXX value such that
  *                              #PSA_ALG_IS_AEAD(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p key is not compatible with \p alg.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not supported or is not an AEAD algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2437,19 +2437,19 @@ psa_status_t psa_aead_decrypt_setup(psa_aead_operation_t *operation,
  * \param[out] nonce_length     On success, the number of bytes of the
  *                              generated nonce.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active aead encrypt
  *         operation, with no nonce set).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p nonce buffer is too small.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2478,19 +2478,19 @@ psa_status_t psa_aead_generate_nonce(psa_aead_operation_t *operation,
  * \param[in] nonce             Buffer containing the nonce to use.
  * \param nonce_length          Size of the nonce in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, with no nonce
  *         set).
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The size of \p nonce is not acceptable for the chosen algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2523,20 +2523,20 @@ psa_status_t psa_aead_set_nonce(psa_aead_operation_t *operation,
  *                              authenticated data in bytes.
  * \param plaintext_length      Size of the plaintext to encrypt in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, and
  *         psa_aead_update_ad() and psa_aead_update() must not have been
  *         called yet).
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         At least one of the lengths is not acceptable for the chosen
  *         algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2571,21 +2571,21 @@ psa_status_t psa_aead_set_lengths(psa_aead_operation_t *operation,
  *                              additional data.
  * \param input_length          Size of the \p input buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, have a nonce
  *         set, have lengths set if required by the algorithm, and
  *         psa_aead_update() must not have been called yet).
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total input length overflows the additional data length that
  *         was previously specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2649,29 +2649,29 @@ psa_status_t psa_aead_update_ad(psa_aead_operation_t *operation,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active, have a nonce
  *         set, and have lengths set if required by the algorithm).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small.
  *         #PSA_AEAD_UPDATE_OUTPUT_SIZE(\c key_type, \c alg, \p input_length) or
  *         #PSA_AEAD_UPDATE_OUTPUT_MAX_SIZE(\p input_length) can be used to
  *         determine the required buffer size.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total length of input to psa_aead_update_ad() so far is
  *         less than the additional data length that was previously
  *         specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total input length overflows the plaintext length that
  *         was previously specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2734,32 +2734,32 @@ psa_status_t psa_aead_update(psa_aead_operation_t *operation,
  * \param[out] tag_length       On success, the number of bytes
  *                              that make up the returned tag.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active encryption
  *         operation with a nonce set).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p ciphertext or \p tag buffer is too small.
  *         #PSA_AEAD_FINISH_OUTPUT_SIZE(\c key_type, \c alg) or
  *         #PSA_AEAD_FINISH_OUTPUT_MAX_SIZE can be used to determine the
  *         required \p ciphertext buffer size. #PSA_AEAD_TAG_LENGTH(\c key_type,
  *         \c key_bits, \c alg) or #PSA_AEAD_TAG_MAX_SIZE can be used to
  *         determine the required \p tag buffer size.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total length of input to psa_aead_update_ad() so far is
  *         less than the additional data length that was previously
  *         specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total length of input to psa_aead_update() so far is
  *         less than the plaintext length that was previously
  *         specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2818,33 +2818,33 @@ psa_status_t psa_aead_finish(psa_aead_operation_t *operation,
  * \param[in] tag               Buffer containing the authentication tag.
  * \param tag_length            Size of the \p tag buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The calculations were successful, but the authentication tag is
  *         not correct.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be an active decryption
  *         operation with a nonce set).
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p plaintext buffer is too small.
  *         #PSA_AEAD_VERIFY_OUTPUT_SIZE(\c key_type, \c alg) or
  *         #PSA_AEAD_VERIFY_OUTPUT_MAX_SIZE can be used to determine the
  *         required buffer size.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total length of input to psa_aead_update_ad() so far is
  *         less than the additional data length that was previously
  *         specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The total length of input to psa_aead_update() so far is
  *         less than the plaintext length that was previously
  *         specified with psa_aead_set_lengths().
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2872,11 +2872,11 @@ psa_status_t psa_aead_verify(psa_aead_operation_t *operation,
  *
  * \param[in,out] operation     Initialized AEAD operation.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2921,28 +2921,28 @@ psa_status_t psa_aead_abort(psa_aead_operation_t *operation);
  * \param[out] signature_length On success, the number of bytes that make up
  *                              the returned signature value.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The key does not have the #PSA_KEY_USAGE_SIGN_MESSAGE flag,
  *         or it does not permit the requested algorithm.
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p signature buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_SIGN_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of \p key.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -2977,24 +2977,24 @@ psa_status_t psa_sign_message( mbedtls_svc_key_id_t key,
  * \param[out] signature        Buffer containing the signature to verify.
  * \param[in]  signature_length Size of the \p signature buffer in bytes.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The key does not have the #PSA_KEY_USAGE_SIGN_MESSAGE flag,
  *         or it does not permit the requested algorithm.
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The calculation was performed successfully, but the passed signature
  *         is not a valid signature.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3030,24 +3030,24 @@ psa_status_t psa_verify_message( mbedtls_svc_key_id_t key,
  * \param[out] signature_length On success, the number of bytes
  *                              that make up the returned signature value.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p signature buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_SIGN_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of \p key.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3084,21 +3084,21 @@ psa_status_t psa_sign_hash(mbedtls_svc_key_id_t key,
  * \param[in] signature     Buffer containing the signature to verify.
  * \param signature_length  Size of the \p signature buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         The signature is valid.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_SIGNATURE
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_SIGNATURE
  *         The calculation was perfomed successfully, but the passed
  *         signature is not a valid signature.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3139,24 +3139,24 @@ psa_status_t psa_verify_hash(mbedtls_svc_key_id_t key,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_ASYMMETRIC_ENCRYPT_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of \p key.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3199,25 +3199,25 @@ psa_status_t psa_asymmetric_encrypt(mbedtls_svc_key_id_t key,
  * \param[out] output_length    On success, the number of bytes
  *                              that make up the returned output.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p output buffer is too small. You can
  *         determine a sufficient buffer size by calling
  *         #PSA_ASYMMETRIC_DECRYPT_OUTPUT_SIZE(\c key_type, \c key_bits, \p alg)
  *         where \c key_type and \c key_bits are the type and bit-size
  *         respectively of \p key.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_INVALID_PADDING
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_INVALID_PADDING
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3326,20 +3326,20 @@ static psa_key_derivation_operation_t psa_key_derivation_operation_init(void);
  *                                (\c PSA_ALG_XXX value such that
  *                                #PSA_ALG_IS_KEY_DERIVATION(\p alg) is true).
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c alg is not a key derivation algorithm.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \c alg is not supported or is not a key derivation algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3357,13 +3357,13 @@ psa_status_t psa_key_derivation_setup(
  * \param[in] operation     The operation to query.
  * \param[out] capacity     On success, the capacity of the operation.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active).
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3382,17 +3382,17 @@ psa_status_t psa_key_derivation_get_capacity(
  *                          It must be less or equal to the operation's
  *                          current capacity.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p capacity is larger than the operation's current capacity.
  *         In this case, the operation object remains valid and its capacity
  *         remains unchanged.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active).
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3434,20 +3434,20 @@ psa_status_t psa_key_derivation_set_capacity(
  * \param[in] data                Input data to use.
  * \param data_length             Size of the \p data buffer in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c step is not compatible with the operation's algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c step does not allow direct inputs.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid for this input \p step.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3484,23 +3484,23 @@ psa_status_t psa_key_derivation_input_bytes(
  *                                appropriate type for step and must allow the
  *                                usage #PSA_KEY_USAGE_DERIVE.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c step is not compatible with the operation's algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c step does not allow key inputs of the given type
  *         or does not allow key inputs at all.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid for this input \p step.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3551,26 +3551,26 @@ psa_status_t psa_key_derivation_input_key(
  *                          psa_export_public_key().
  * \param peer_key_length         Size of \p peer_key in bytes.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid for this key agreement \p step.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c private_key is not compatible with \c alg,
  *         or \p peer_key is not valid for \c alg or not compatible with
  *         \c private_key.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \c alg is not supported or is not a key derivation algorithm.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \c step does not allow an input resulting from a key agreement.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3599,23 +3599,23 @@ psa_status_t psa_key_derivation_key_agreement(
  * \param[out] output       Buffer where the output will be written.
  * \param output_length     Number of bytes to output.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_INSUFFICIENT_DATA
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_INSUFFICIENT_DATA
  *                          The operation's capacity was less than
  *                          \p output_length bytes. Note that in this case,
  *                          no output is written to the output buffer.
  *                          The operation's capacity is set to 0, thus
  *                          subsequent calls to this function will not
  *                          succeed, even with a smaller output buffer.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active and completed
  *         all required input steps).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3729,38 +3729,38 @@ psa_status_t psa_key_derivation_output_bytes(
  *                          identifier defined in \p attributes.
  *                          \c 0 on failure.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
  *         If the key is persistent, the key material and the key's metadata
  *         have been saved to persistent storage.
- * \return #PSA_ERROR_ALREADY_EXISTS
+ * \retval #PSA_ERROR_ALREADY_EXISTS
  *         This is an attempt to create a persistent key, and there is
  *         already a persistent key with the given identifier.
- * \return #PSA_ERROR_INSUFFICIENT_DATA
+ * \retval #PSA_ERROR_INSUFFICIENT_DATA
  *         There was not enough data to create the desired key.
  *         Note that in this case, no output is written to the output buffer.
  *         The operation's capacity is set to 0, thus subsequent calls to
  *         this function will not succeed, even with a smaller output buffer.
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         The key type or key size is not supported, either by the
  *         implementation in general or in this particular location.
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         The provided key attributes are not valid for the operation.
- * \return #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_NOT_PERMITTED
  *         The #PSA_KEY_DERIVATION_INPUT_SECRET input was not provided through
  *         a key.
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be active and completed
  *         all required input steps).
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_INSUFFICIENT_STORAGE
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3784,11 +3784,11 @@ psa_status_t psa_key_derivation_output_key(
  *
  * \param[in,out] operation    The operation to abort.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3823,26 +3823,26 @@ psa_status_t psa_key_derivation_abort(
  * \param[out] output_length      On success, the number of bytes
  *                                that make up the returned output.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
- * \return #PSA_ERROR_INVALID_HANDLE
- * \return #PSA_ERROR_NOT_PERMITTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_HANDLE
+ * \retval #PSA_ERROR_NOT_PERMITTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p alg is not a key agreement algorithm
- * \return #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
  *         \p private_key is not compatible with \p alg,
  *         or \p peer_key is not valid for \p alg or not compatible with
  *         \p private_key.
- * \return #PSA_ERROR_BUFFER_TOO_SMALL
+ * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         \p output_size is too small
- * \return #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_NOT_SUPPORTED
  *         \p alg is not a supported key agreement algorithm.
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3873,14 +3873,14 @@ psa_status_t psa_raw_key_agreement(psa_algorithm_t alg,
  * \param[out] output       Output buffer for the generated data.
  * \param output_size       Number of bytes to generate and output.
  *
- * \return #PSA_SUCCESS
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_SUCCESS
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
@@ -3909,25 +3909,25 @@ psa_status_t psa_generate_random(uint8_t *output,
  *                          identifier defined in \p attributes.
  *                          \c 0 on failure.
  *
- * \return #PSA_SUCCESS
+ * \retval #PSA_SUCCESS
  *         Success.
  *         If the key is persistent, the key material and the key's metadata
  *         have been saved to persistent storage.
- * \return #PSA_ERROR_ALREADY_EXISTS
+ * \retval #PSA_ERROR_ALREADY_EXISTS
  *         This is an attempt to create a persistent key, and there is
  *         already a persistent key with the given identifier.
- * \return #PSA_ERROR_NOT_SUPPORTED
- * \return #PSA_ERROR_INVALID_ARGUMENT
- * \return #PSA_ERROR_INSUFFICIENT_MEMORY
- * \return #PSA_ERROR_INSUFFICIENT_ENTROPY
- * \return #PSA_ERROR_COMMUNICATION_FAILURE
- * \return #PSA_ERROR_HARDWARE_FAILURE
- * \return #PSA_ERROR_CORRUPTION_DETECTED
- * \return #PSA_ERROR_INSUFFICIENT_STORAGE
- * \return #PSA_ERROR_DATA_INVALID
- * \return #PSA_ERROR_DATA_CORRUPT
- * \return #PSA_ERROR_STORAGE_FAILURE
- * \return #PSA_ERROR_BAD_STATE
+ * \retval #PSA_ERROR_NOT_SUPPORTED
+ * \retval #PSA_ERROR_INVALID_ARGUMENT
+ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
+ * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY
+ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
+ * \retval #PSA_ERROR_HARDWARE_FAILURE
+ * \retval #PSA_ERROR_CORRUPTION_DETECTED
+ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
+ * \retval #PSA_ERROR_DATA_INVALID
+ * \retval #PSA_ERROR_DATA_CORRUPT
+ * \retval #PSA_ERROR_STORAGE_FAILURE
+ * \retval #PSA_ERROR_BAD_STATE
  *         The library has not been previously initialized by psa_crypto_init().
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.

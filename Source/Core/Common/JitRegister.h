@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include "Common/Logging/Log.h"
 
 #include <fmt/format.h>
 
@@ -28,6 +29,6 @@ inline void Register(const void* start, const void* end, fmt::format_string<Args
                      Args&&... args)
 {
   u32 code_size = (u32)((const char*)end - (const char*)start);
-  Register(start, code_size, fmt::format(format, std::forward<Args>(args)...));
+  Register(start, code_size, fmt::format(fmt::runtime(format), Common::Log::FmtValue(std::forward<Args>(args))...));
 }
 }  // namespace JitRegister
